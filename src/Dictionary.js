@@ -5,23 +5,14 @@ import axios from "axios";
 import "./dctonary.css";
 
 const Dictionary = () => {
-  const [input, setInput] = useState(null);
-  const [results, setResults] = useState([]);
+  const [input, setInput] = useState("");
+  const [result, setResult] = useState(null);
+  
+
 
   const handleResult = (response) => {
-    console.log(response.data);
-    const data = response.data;
-   const definitionList = [];
-    if (Array.isArray(data)) {
-      data.forEach((i) => {
-        if (i?.shortdef && i.shortdef.length > 0) {
-          i.shortdef.forEach((d) => {
-            definitionList.push(d);
-          });
-        }
-      });
-    }
-    setResults(definitionList);
+   console.log(response.data);
+   setResult(response.data[0]);
   };
 
   const keyword = (event) => {
@@ -29,10 +20,9 @@ const Dictionary = () => {
   };
   const search = (event) => {
     event.preventDefault();
-    let apiKey = "9caac34a-e609-49f0-a93b-033601cb78e2";
-    let apiUrl = `https://www.dictionaryapi.com/api/v3/references/collegiate/json/${input} ?key=${apiKey}`;
+    
+    let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${input} `;
     axios.get(apiUrl).then(handleResult);
-    console.log(apiUrl);
   };
 
   return (
@@ -40,7 +30,7 @@ const Dictionary = () => {
       <form onSubmit={search}>
         <input type="search" onChange={keyword} />
       </form>
-      <Result {...{ results }} />
+      <Result result= {result} />
     </div>
   );
 };

@@ -1,22 +1,28 @@
 import React from "react";
+import Meaning from "./Meaning";
 
-const Result = ({ results }) => {
-  return (
-    <>
-      {results && (
-        <div className="Result">
-          <h2>
-            {" "}
-            {results.meta} </h2>
-        
-          {results.map((definition, i) => {
-            return <p key={i}>{definition} </p>;
+const Result = (props) => {
+  if (props.result) {
+    
+  return <>
+       <div className="Result">
+         <h2>
+           {props.result.word}
+         </h2>
+         <p>
+          {props.result.meanings.map(function(meaning , index ){
+             return <>
+              <div key={index}>
+                 <Meaning meaning ={meaning}/>
+              </div>
+             </>
           })}
-        </div>
-      )}
-    </>
-  );
+         </p>
+       </div>
+  </>
+  } else {
+    return null;
+  }
+    
 };
-
-
 export default Result;
