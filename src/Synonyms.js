@@ -5,6 +5,7 @@ const Synonyms = (props) => {
         
     return <>
       <div className='Synonyms'>
+          <h2>Synonyms</h2>
          <ul>
              {props.synonyms.map(function(synonyms , index){
                  return <>
