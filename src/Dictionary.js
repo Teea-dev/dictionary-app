@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Result from "./Result";
 import axios from "axios";
 
-import "./dctonary.css";
+import "./dictionary.css";
 
 const Dictionary = () => {
   const [input, setInput] = useState("");
@@ -27,9 +27,11 @@ const Dictionary = () => {
 
   return (
     <div className="Dictionary">
+      <section>
       <form onSubmit={search}>
         <input type="search" onChange={keyword} />
       </form>
+      </section>
       <Result result= {result} />
     </div>
   );

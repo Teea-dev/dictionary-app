@@ -4,27 +4,30 @@ import Phonetic from "./Phonetic";
 
 
 
+
 const Result = (props) => {
   if (props.result) {
     
   return (
     <>
       <div className="Result">
+    <section>
         <h2>{props.result.word}</h2>
-        {props.result.phonetics.map(function(phonetic , index){
-          return(
+        {props.result.phonetics.map(function (phonetic, index) {
+          return (
             <div key={index}>
-             <Phonetic phonetic = {phonetic}/>
-              </div>
-          )
+              <Phonetic phonetic={phonetic} />
+            </div>
+          );
         })}
+        </section>
         <p>
           {props.result.meanings.map(function (meaning, index) {
             return (
               <>
-                <div key={index}>
+                <section key={index}>
                   <Meaning meaning={meaning} />
-                </div>
+                </section>
               </>
             );
           })}

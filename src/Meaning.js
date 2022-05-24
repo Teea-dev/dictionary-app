@@ -14,26 +14,16 @@ const Meaning = (props) => {
               <>
                 <div key={index}>
                   <p>
-                  Similar: {definition.definition}
+                   {definition.definition}
                     <br />
-                    {/* if ({definition.length} {'>'} 0) {
-                       return(
-
-                          <em>{definition.example}</em>;
-                       )
-
-                    &rbrace; else {
-                      return null;
-                    {'}'}
-
-                    );  */}
+                    
                     <em>{definition.example}</em>
                   </p>
                 </div>
               </>
             );
           })}
-          <Synonyms synonyms={props.meaning.synonyms} />
+        <Synonyms synonyms={props.meaning.synonyms} />
         </p>
       </>
     );
