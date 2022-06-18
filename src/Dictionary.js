@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import Result from "./Result";
 import axios from "axios";
-
+import Photo from "./Photo";
 import "./dictionary.css";
 
 const Dictionary = () => {
   const [input, setInput] = useState("nostalgia");
   const [result, setResult] = useState(null);
   const[buffer,setBuffer] = useState(false);
-
+  const[photo,setPhoto] = useState(null);
 
   const handleSearch = (event) =>{
       event.preventDefault();
@@ -16,17 +16,28 @@ const Dictionary = () => {
   };
 
   const handleResult = (response) => {
-   console.log(response.data);
+  
    setResult(response.data[0]);
   };
 
   const keyword = (event) => {
     setInput(event.target.value);
   };
+  const handlePexelResponse = (response) =>{
+    console.log(response.data);
+     setPhoto(response.data);
+  }
   const search = () => {
     
     let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${input} `;
     axios.get(apiUrl).then(handleResult);
+
+
+    let pexelApiKey =
+      " 563492ad6f9170000100000133569d43e247462da6f37f165f24a3e8";
+    let pexelApiUrl = `https://api.pexels.com/v1/search?query=${input}&per_page=1`;
+    // let headers = {Authorization: `Bearer ${pexelApiKey}`};
+    axios.get(pexelApiUrl , {headers: {"Authorization": `Bearer ${pexelApiKey}`}}).then(handlePexelResponse);
   };
   const load =()=>{
      setBuffer(true);
@@ -42,6 +53,7 @@ const Dictionary = () => {
         </form>
         </section>
         <Result result= {result} />
+      <Photo photo={photo}/>
       </div>
     );
   }else{
