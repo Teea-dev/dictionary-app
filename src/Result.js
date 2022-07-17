@@ -6,6 +6,7 @@ import "./result.css";
 
 
 const Result = (props) => {
+   
   if (props.result) {
     
   return (

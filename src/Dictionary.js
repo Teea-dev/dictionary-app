@@ -16,7 +16,7 @@ const Dictionary = () => {
   };
 
   const handleResult = (response) => {
-  
+  if(!response.data)return
    setResult(response.data[0]);
   };
 
@@ -24,8 +24,8 @@ const Dictionary = () => {
     setInput(event.target.value);
   };
   const handlePexelResponse = (response) =>{
-    console.log(response.data);
-     setPhoto(response.data);
+   if (!response.data)return
+     setPhoto(response.data.photos);
   }
   const search = () => {
     
@@ -34,8 +34,8 @@ const Dictionary = () => {
 
 
     let pexelApiKey =
-      " 563492ad6f9170000100000133569d43e247462da6f37f165f24a3e8";
-    let pexelApiUrl = `https://api.pexels.com/v1/search?query=${input}&per_page=1`;
+      "563492ad6f9170000100000133569d43e247462da6f37f165f24a3e8";
+    let pexelApiUrl = `https://api.pexels.com/v1/search?query=${input}&per_page=4`;
     // let headers = {Authorization: `Bearer ${pexelApiKey}`};
     axios.get(pexelApiUrl , {headers: {"Authorization": `Bearer ${pexelApiKey}`}}).then(handlePexelResponse);
   };
@@ -48,12 +48,12 @@ const Dictionary = () => {
     return (
       <div className="Dictionary">
         <section>
-        <form onSubmit={handleSearch}>
-          <input type="search" onChange={keyword} />
-        </form>
+          <form onSubmit={handleSearch}>
+            <input type="search" onChange={keyword} />
+          </form>
         </section>
-        <Result result= {result} />
-      <Photo photo={photo}/>
+        {result && <Result result={result} />}
+        {photo && <Photo photo={photo} />}
       </div>
     );
   }else{
