@@ -35,7 +35,7 @@ const Dictionary = () => {
 
     let pexelApiKey =
       "563492ad6f9170000100000133569d43e247462da6f37f165f24a3e8";
-    let pexelApiUrl = `https://api.pexels.com/v1/search?query=${input}&per_page=4`;
+    let pexelApiUrl = `https://api.pexels.com/v1/search?query=${input}&per_page=6`;
     // let headers = {Authorization: `Bearer ${pexelApiKey}`};
     axios.get(pexelApiUrl , {headers: {"Authorization": `Bearer ${pexelApiKey}`}}).then(handlePexelResponse);
   };
